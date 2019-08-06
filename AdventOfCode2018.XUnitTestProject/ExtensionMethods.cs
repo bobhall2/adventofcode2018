@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace AdventOfCode2018.XUnitTestProject
 {
@@ -23,6 +24,15 @@ namespace AdventOfCode2018.XUnitTestProject
 				}
 			}
 			while (line != default);
+		}
+
+		public async static Task<string> GetContentAsync(this string filename)
+		{
+			var path = Path.Combine("Data", filename);
+
+			using var reader = new StreamReader(path);
+
+			return await reader.ReadToEndAsync();
 		}
 
 		public static IEnumerable<int> GetInbetweenValues(this IEnumerable<int> stateChanges)
