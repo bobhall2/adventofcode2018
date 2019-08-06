@@ -63,11 +63,9 @@ namespace AdventOfCode2018.XUnitTestProject
 		[InlineData("claims.dat", 118_539)]
 		public async Task Day03_ParseFile(string filename, int expected)
 		{
-			var path = Path.Combine("data", filename);
-
 			var squares = new Dictionary<(int, int), int>();
 
-			await foreach (var line in path.GetLinesAsync())
+			await foreach (var line in filename.GetLinesAsync())
 			{
 				var claim = Claim.Parse(line);
 

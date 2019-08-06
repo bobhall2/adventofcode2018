@@ -38,11 +38,9 @@ namespace AdventOfCode2018.XUnitTestProject
 		[InlineData("frequencies.dat", 442)]
 		public async Task Day01_ParseAndSum(string filename, int expected)
 		{
-			var path = Path.Combine("data", filename);
-
 			var actual = 0;
 
-			await foreach (var line in path.GetLinesAsync())
+			await foreach (var line in filename.GetLinesAsync())
 			{
 				actual += int.Parse(line);
 			}

@@ -48,11 +48,9 @@ namespace AdventOfCode2018.XUnitTestProject
 		[InlineData("ids.dat", 6_200)]
 		public async Task Day02_ParseAndChecksum(string filename, int expected)
 		{
-			var path = Path.Combine("data", filename);
-
 			var groupings = new List<Groupings>();
 
-			await foreach (var line in path.GetLinesAsync())
+			await foreach (var line in filename.GetLinesAsync())
 			{
 				var grouping = GetGroupings(line);
 
