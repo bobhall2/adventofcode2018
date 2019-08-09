@@ -82,5 +82,45 @@ namespace AdventOfCode2018.XUnitTestProject
 
 			return array;
 		}
+
+		[Theory]
+		[InlineData(5, 5, 0, 5, 5)]
+		[InlineData(5, 5, 1, 5, 5, 5, 4, 5, 6, 4, 5, 6, 5)]
+		public void Day07_GetPointsFromPoint(int x, int y, int manhattanDistance, params int[] expectedCoordsList)
+		{
+			var point = new Point(x, y);
+			var actuals = GetPointsFromPoint(point, manhattanDistance).ToList();
+
+			var expecteds = expectedCoordsList.GetPairs().Select(t => new Point(t.first, t.second)).ToList();
+
+			Assert.Equal(expecteds.Count, actuals.Count);
+
+			Assert.Equal(expecteds, actuals);
+		}
+
+		private static readonly Size _up = new Size(0, -1);
+		private static readonly Size _down = new Size(0, 1);
+		private static readonly Size _left = new Size(-1, 0);
+		private static readonly Size _right = new Size(1, 0);
+
+		private static readonly IEnumerable<Size> _directions = new[] { _up, _down, _left, _right, };
+
+		private static IEnumerable<Point> GetPointsFromPoint(Point point, int manhattanDistance)
+		{
+			yield return point;
+
+			if (manhattanDistance == 0)
+			{
+				yield break;
+			}
+
+			foreach (var direction in _directions)
+			{
+				foreach (var subPoint in GetPointsFromPoint(point + direction, manhattanDistance - 1))
+				{
+					yield return subPoint;
+				}
+			}
+		}
 	}
 }

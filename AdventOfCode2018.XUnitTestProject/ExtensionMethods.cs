@@ -51,5 +51,21 @@ namespace AdventOfCode2018.XUnitTestProject
 				}
 			}
 		}
+
+		public static IEnumerable<(T first, T second)> GetPairs<T>(this IEnumerable<T> collection)
+		{
+			using var enumerator = collection.GetEnumerator();
+
+			while (enumerator.MoveNext())
+			{
+				var first = enumerator.Current;
+
+				var secdond = enumerator.MoveNext()
+					? enumerator.Current
+					: default;
+
+				yield return (first, secdond);
+			}
+		}
 	}
 }
