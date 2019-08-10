@@ -86,7 +86,7 @@ namespace AdventOfCode2018.XUnitTestProject
 		[Theory]
 		[InlineData(5, 5, 0, 5, 5)]
 		[InlineData(5, 5, 1, 5, 5, 5, 4, 5, 6, 4, 5, 6, 5)]
-		public void Day07_GetPointsFromPoint(int x, int y, int manhattanDistance, params int[] expectedCoordsList)
+		public void Day06_GetPointsFromPoint(int x, int y, int manhattanDistance, params int[] expectedCoordsList)
 		{
 			var point = new Point(x, y);
 			var actuals = GetPointsFromPoint(point, manhattanDistance).ToList();
