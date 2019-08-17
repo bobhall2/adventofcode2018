@@ -54,17 +54,7 @@ namespace AdventOfCode2018.XUnitTestProject
 		}
 
 		private static IEnumerable<Point> GetPoints(IEnumerable<int> coordinates)
-		{
-			using var enumerator = coordinates.GetEnumerator();
-
-			while (enumerator.MoveNext())
-			{
-				var x = enumerator.Current;
-				enumerator.MoveNext();
-				var y = enumerator.Current;
-				yield return new Point(x, y);
-			}
-		}
+			=> coordinates.GetPairs((x, y) => new Point(x, y));
 
 		private static char[,] GetGrid(ICollection<Point> points)
 		{

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -46,7 +47,10 @@ namespace AdventOfCode2018.XUnitTestProject
 			}
 		}
 
-		public static IEnumerable<(T first, T second)> GetPairs<T>(this IEnumerable<T> collection)
+		public static IEnumerable<(T first, T second)> GetPairs<T>(this IEnumerable<T> collection) =>
+			collection.GetPairs<T, ValueTuple<T, T>>((first, second) => (first, second));
+
+		public static IEnumerable<TResult> GetPairs<T, TResult>(this IEnumerable<T> collection, Func<T, T, TResult> func)
 		{
 			using var enumerator = collection.GetEnumerator();
 
@@ -54,11 +58,11 @@ namespace AdventOfCode2018.XUnitTestProject
 			{
 				var first = enumerator.Current;
 
-				var secdond = enumerator.MoveNext()
+				var second = enumerator.MoveNext()
 					? enumerator.Current
 					: default;
 
-				yield return (first, secdond);
+				yield return func(first, second);
 			}
 		}
 	}

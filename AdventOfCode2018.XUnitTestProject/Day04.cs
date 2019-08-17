@@ -270,8 +270,10 @@ namespace AdventOfCode2018.XUnitTestProject
 					_ => Types.BeginsShift,
 				};
 
-				var guardId = match.Groups["guardId"].Success
-					? short.Parse(match.Groups["guardId"].Value)
+				var group = match.Groups["guardId"];
+
+				var guardId = group.Success
+					? short.Parse(group.Value)
 					: default(short?);
 
 				return new LogEntry(dateTime, type, guardId);
